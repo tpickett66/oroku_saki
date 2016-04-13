@@ -12,5 +12,9 @@ module OrokuSaki
       str.shred!
       expect(str).to eq Array.new(length, "\u0000").join
     end
+
+    it 'must add String#shred_later' do
+      expect('').to respond_to(:shred_later)
+    end
   end
 end
