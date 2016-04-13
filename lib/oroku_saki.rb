@@ -15,5 +15,6 @@ module OrokuSaki
         "OrokuSaki.shred_later received #{str} (#{str.class}), expected String!"
     end
     ObjectSpace.define_finalizer(str, STRING_FINALIZER)
+    str
   end
 end

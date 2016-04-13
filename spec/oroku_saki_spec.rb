@@ -16,14 +16,13 @@ RSpec.describe OrokuSaki do
     end
   end
 
+  # There isn't really a good way to test finalizers since there isn't any way
+  # to force the GC to reap a particular object. The following tests are just
+  # verifying other behavior of the method.
   describe '.shred_later(str)' do
-    # This isn't really a good test since it doesn't verify what's being
-    # returned or even if there is a finalizer actually set; but, due to the
-    # non-deterministic nature of the GC we can't actually force an object to
-    # be collected.
-    it 'must define a finalizer on the supplied string' do
+    it 'must return the original string' do
       return_value = OrokuSaki.shred_later('foobar')
-      expect(return_value).to_not be_nil
+      expect(return_value).to eq 'foobar'
     end
 
     it 'must raise an exception when a non-string object is passed' do
