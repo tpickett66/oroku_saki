@@ -10,6 +10,10 @@ module OrokuSaki
   }
   private_constant :STRING_FINALIZER
 
+  class << self
+    private :secure_compare_c
+  end
+
   # Attaches the shred method as a finalizer for the passed string
   #
   # Gems working with sensitive data that needs to be returned to the user need
@@ -19,7 +23,7 @@ module OrokuSaki
   #
   # @param [String] str The string to be shredded befor GC reaping
   # @return [String] The original string
-  #
+  # @raise [TypeError] When passed something other than a String
   def self.shred_later(str)
     if !(String === str)
       raise TypeError,
@@ -27,5 +31,15 @@ module OrokuSaki
     end
     ObjectSpace.define_finalizer(str, STRING_FINALIZER)
     str
+  end
+
+  # Bitewise compare two strings in constant time
+  #
+  # @param [String] a The first string to look at
+  # @param [String] b The second string to look at
+  # @return [Boolean]
+  # @raise [TypeError] When passed something other than a String for either argument
+  def self.secure_compare(a, b)
+    secure_compare_c(a, b) == 0
   end
 end

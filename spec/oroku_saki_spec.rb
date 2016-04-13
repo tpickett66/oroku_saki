@@ -30,4 +30,29 @@ RSpec.describe OrokuSaki do
         to raise_error(TypeError, /received 42 \(Fixnum\)/)
     end
   end
+
+  describe '.secure_compare(a, b)' do
+    it 'must raise an error if the first argument is not a String' do
+      expect { OrokuSaki.secure_compare(42, 'string') }.
+        to raise_error(TypeError, /received 42 \(Fixnum\)/)
+    end
+
+    it 'must raise an error if the second argument is not a String' do
+      expect { OrokuSaki.secure_compare('string', 42) }.
+        to raise_error(TypeError, /received 42 \(Fixnum\)/)
+    end
+
+    it 'must return false when the arguments are not the same length' do
+      expect(OrokuSaki.secure_compare('string', 'str')).to eq false
+      expect(OrokuSaki.secure_compare('str', 'string')).to eq false
+    end
+
+    it 'must return false when the arguments do not match' do
+      expect(OrokuSaki.secure_compare('string', 'gnirts')).to eq false
+    end
+
+    it 'must return true when the arguments match' do
+      expect(OrokuSaki.secure_compare('string', 'string')).to eq true
+    end
+  end
 end
