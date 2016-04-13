@@ -38,15 +38,23 @@ second_secret = 'another sekret'
 second_secret.shred! # => "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
 ```
 
-Setting a string to be shredded before garbage collection:
+Setting a string to be shredded before garbage collection via a finalizer:
+
 ```ruby
 my_secret = 'super sekret value!!!'
 OrokuSaki.shred_later(my_secret) # => nil
 puts my_secret # => "super sekret value!!!"
-# A finalizer shreds the str just before it gets collected.
 
 second_secret = 'another sekret'
 second_scret.shred_later
+```
+
+Comparing Strings in constant time (nearly as fast as `==` for small inputs):
+
+```ruby
+hmac = '16b9b8ae8e164768d0505bcb16269efb35804643dd351084b3c6ebbc6f7db2c8'
+other_hmac = '16b9b8ae8e164768d0505bcb16269efb35804643dd351084b3c6ebbc6f7db2c8'
+OrokuSaki.secure_compare(hmac, other_hmac) #=> true
 ```
 
 ## Development

@@ -39,9 +39,15 @@ int secure_compare(VALUE rb_str_a, VALUE rb_str_b) {
   return (1 & ((d - 1) >> 8)) - 1;
 }
 
-/* The C implementation of the secure compare, the return type is a Fixnum
- * to avoid certain optimizations that cause the branch predictor to leak timing
- * information.
+/* The C implementation of secure compare, don't use!
+ *
+ * The return type is a Fixnum to avoid certain optimizations that cause the
+ * branch predictor to potentially leak timing information.
+ *
+ * @param [String] rb_str_a
+ * @param [String] rb_str_b
+ * @return [Fixnum] Zero for success, other values for failure.
+ * @api private
  */
 VALUE oroku_saki_secure_compare(VALUE rb_module, VALUE rb_str_a, VALUE rb_str_b) {
   raise_unless_string(rb_str_a, "OrokuSaki.secure_compare");
@@ -60,7 +66,7 @@ VALUE oroku_saki_secure_compare(VALUE rb_module, VALUE rb_str_a, VALUE rb_str_b)
  * it does not respect frozen states of strings so make sure you're actually
  * done with the String before using this method.
  *
- * @param [String] str The string to be zeroed out.
+ * @param [String] rb_str The string to be zeroed out.
  * @raise [TypeError] When passed something other than a String
  * @return [nil]
  */

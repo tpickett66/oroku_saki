@@ -10,9 +10,10 @@ Gem::Specification.new do |spec|
   spec.email         = ["t.pickett66@gmail.com"]
 
   spec.summary       = %q{OrokuSaki, a.k.a. Shredder, is the destroyer of strings and attacker's worst nightmare!}
-  spec.description   = "OrokuSaki, a.k.a. Shredder, is a small collection for " \
-    "ensuring the strings used in cryptographic operations remain secret. It is " \
-    "based around a simple memzero C function."
+  spec.description   = "OrokuSaki, a.k.a. Shredder, is a small collection of " \
+    "utilities for ensuring the strings used in cryptographic operations " \
+    "remain secret. This currently includes memory zeroing and constant time " \
+    "String comparisons."
   spec.homepage      = "https://github.com/tpickett66/oroku_saki"
   spec.license       = "MIT"
 
