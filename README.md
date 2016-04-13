@@ -1,8 +1,10 @@
 # OrokuSaki
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/oroku_saki`. To experiment with that code, run `bin/console` for an interactive prompt.
+OrokuSaka, a.k.a. Shredder, is the destroyer of strings and attacker's worst
+nightmare!
 
-TODO: Delete this and the text above, and describe your gem
+But seriously, this is a collection of small tools for helping your secrets in
+crypto applications stay secret.
 
 ## Installation
 
@@ -22,7 +24,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Immediately zeroing out the memory location of a string you want to protect:
+
+```ruby
+my_secret = 'super sekret value!!!'
+OrokuSaka.shred!(my_secret) # => nil
+puts my_secret # => "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+
+second_secret = 'another sekret'
+# String#shred! delegates to OrokuSaka.shred!
+second_secret.shred! # => "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+```
+
+Setting a string to be shredded before garbage collection:
+```ruby
+my_secret = 'super sekret value!!!'
+OrokuSaka.shred_later(my_secret) # => nil
+puts my_secret # => "super sekret value!!!"
+# A finalizer shreds the str just before it gets collected.
+
+second_secret = 'another sekret'
+second_scret.shred_later
+```
 
 ## Development
 
@@ -32,7 +55,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/oroku_saki. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/tpickett66/oroku_saki. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
