@@ -1,5 +1,15 @@
 #include "oroku_saki.h"
 
+/* Zero out the memory housing the passed string.
+ *
+ * This method takes in a string and zeros out the memory it occupies, by design
+ * it does not respect frozen states of strings so make sure you're actually
+ * done with the String before using this method.
+ *
+ * @param [String] str The string to be zeroed out.
+ * @raise [TypeError] When passed something other than a String
+ * @return [nil]
+ */
 VALUE oroku_saki_shred_bang(VALUE rb_module, VALUE rb_str) {
   if (TYPE(rb_str) != T_STRING) {
     VALUE inspected_obj, obj_class_name;

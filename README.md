@@ -1,6 +1,6 @@
 # OrokuSaki
 
-OrokuSaka, a.k.a. Shredder, is the destroyer of strings and attacker's worst
+OrokuSaki, a.k.a. Shredder, is the destroyer of strings and attacker's worst
 nightmare!
 
 But seriously, this is a collection of small tools for helping your secrets in
@@ -28,18 +28,18 @@ Immediately zeroing out the memory location of a string you want to protect:
 
 ```ruby
 my_secret = 'super sekret value!!!'
-OrokuSaka.shred!(my_secret) # => nil
+OrokuSaki.shred!(my_secret) # => nil
 puts my_secret # => "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
 
 second_secret = 'another sekret'
-# String#shred! delegates to OrokuSaka.shred!
+# String#shred! delegates to OrokuSaki.shred!
 second_secret.shred! # => "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
 ```
 
 Setting a string to be shredded before garbage collection:
 ```ruby
 my_secret = 'super sekret value!!!'
-OrokuSaka.shred_later(my_secret) # => nil
+OrokuSaki.shred_later(my_secret) # => nil
 puts my_secret # => "super sekret value!!!"
 # A finalizer shreds the str just before it gets collected.
 
