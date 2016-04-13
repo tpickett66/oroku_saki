@@ -1,4 +1,6 @@
 # OrokuSaki
+[![Build Status](https://travis-ci.org/tpickett66/oroku_saki.svg?branch=master)](https://travis-ci.org/tpickett66/oroku_saki)
+[![Gem Version](https://badge.fury.io/rb/oroku_saki.svg)](https://badge.fury.io/rb/oroku_saki)
 
 OrokuSaki, a.k.a. Shredder, is the destroyer of strings and attacker's worst
 nightmare!
