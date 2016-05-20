@@ -29,7 +29,7 @@ module OrokuSaki
       raise TypeError,
         "OrokuSaki.shred_later received #{str} (#{str.class}), expected String!"
     end
-    ObjectSpace.define_finalizer(str, STRING_FINALIZER)
+    ObjectSpace.define_finalizer(str, STRING_FINALIZER) unless str.frozen?
     str
   end
 
