@@ -29,6 +29,10 @@ RSpec.describe OrokuSaki do
       expect { OrokuSaki.shred_later(42) }.
         to raise_error(TypeError, /received 42 \(Fixnum\)/)
     end
+
+    it 'must accept frozen strings' do
+      expect { OrokuSaki.shred_later('foobar'.freeze) }.not_to raise_error
+    end
   end
 
   describe '.secure_compare(a, b)' do
