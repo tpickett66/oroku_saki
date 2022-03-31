@@ -6,7 +6,7 @@ require 'objspace'
 
 module OrokuSaki
   STRING_FINALIZER =  ->(id) {
-    OrokuSaki.shred!(ObjectSpace._id2ref(id))
+    OrokuSaki.shred!(ObjectSpace._id2ref(id)) rescue nil
   }
   private_constant :STRING_FINALIZER
 
